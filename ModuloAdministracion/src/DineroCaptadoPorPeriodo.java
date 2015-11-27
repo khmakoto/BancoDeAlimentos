@@ -73,6 +73,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         setTitle("Relación de Dinero Captado de Instituciones");
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
+        setResizable(false);
 
         jLabelTituloRelacionDineroCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTituloRelacionDineroCaptadoInstituciones.setText("Relación de Dinero Captado de Instituciones");

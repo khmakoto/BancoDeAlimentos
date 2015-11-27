@@ -161,13 +161,13 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         jTableSaldosInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableSaldosInstituciones.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Institución", "Área", "Programa", "FolCarAbo", "Folio", "Fecha", "Cargo", "Abono", "Saldo"
             }
         ));
         jTableSaldosInstituciones.setEnabled(false);

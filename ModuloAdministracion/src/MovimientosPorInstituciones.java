@@ -1,9 +1,9 @@
 /***
- * DineroNoCaptadoPorPeriodo
+ * MovimientosPorInstituciones
  * 
- * JFrame que permite al usuario generar un reporte del dinero no captado de
+ * JFrame que permite al usuario generar un reporte de los movimientos por
  * instituciones dependiendo de su elección de Fecha de inicio y término, Área,
- * Programa e Instituciones.
+ * Programa, Subárea, Instituciones y estatus de movimientos.
  * 
  * @author Humberto Makoto Morimoto Burgos      A01280458
  * @author Oscar Abraham González Quintanilla   A01195653
@@ -16,10 +16,10 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
+public class MovimientosPorInstituciones extends javax.swing.JFrame {
 
     /**
-     * DineroNoCaptadoPorPeriodo
+     * MovimientosPorInstituciones
      * 
      * Descripción: Método constructor que establece las condiciones iniciales
      * del JFrame.
@@ -27,7 +27,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
      * @param N/A.
      * @return N/A.
      */
-    public DineroNoCaptadoPorPeriodo() {
+    public MovimientosPorInstituciones() {
         /* Se manda llamar método automáticamente generado por IDE para
          * establecer las condiciones iniciales del JFrame. */
         initComponents();
@@ -50,7 +50,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelTituloRelacionDineroNoCaptadoInstituciones = new javax.swing.JLabel();
+        jLabelTituloRelacionMovimientosPorInstituciones = new javax.swing.JLabel();
         jPanelFechas = new javax.swing.JPanel();
         jLabelFechaInicial = new javax.swing.JLabel();
         observingTextFieldFechaInicial = new ObservingTextField();
@@ -63,18 +63,26 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         jComboBoxArea = new javax.swing.JComboBox();
         jLabelPrograma = new javax.swing.JLabel();
         jComboBoxPrograma = new javax.swing.JComboBox();
+        jLabelSubarea = new javax.swing.JLabel();
+        jComboBoxSubarea = new javax.swing.JComboBox();
         jPanelInstituciones = new javax.swing.JPanel();
-        jLabelInstituciones = new javax.swing.JLabel();
-        jComboBoxInstituciones = new javax.swing.JComboBox();
+        jLabelEstatusMovimientos = new javax.swing.JLabel();
+        jComboBoxEstatusMovimientos = new javax.swing.JComboBox();
+        jPanelInstituciones3 = new javax.swing.JPanel();
+        jLabelInstituciones3 = new javax.swing.JLabel();
+        jComboBoxInstituciones3 = new javax.swing.JComboBox();
         jButtonAtras = new javax.swing.JButton();
         jButtonGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Relación de Dinero No Captado de Instituciones");
+        setTitle("Relación de Movimientos por Instituciones");
+        setMaximumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
-        jLabelTituloRelacionDineroNoCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabelTituloRelacionDineroNoCaptadoInstituciones.setText("Relación de Dinero No Captado por Instituciones");
+        jLabelTituloRelacionMovimientosPorInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelTituloRelacionMovimientosPorInstituciones.setText("Relación de Movimientos por Instituciones");
 
         jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
@@ -111,24 +119,25 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         jPanelFechasLayout.setHorizontalGroup(
             jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFechasLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFechasLayout.createSequentialGroup()
+                        .addGap(162, 162, 162)
+                        .addComponent(jLabelFechaInicial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanelFechasLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(observingTextFieldFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFechaInicial))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonFechaInicial)
+                        .addGap(154, 154, 154)))
+                .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanelFechasLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabelFechaInicial)))
-                .addGap(143, 143, 143)
-                .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFechasLayout.createSequentialGroup()
-                        .addComponent(observingTextFieldFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonFechaFinal))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelFechasLayout.createSequentialGroup()
                         .addComponent(jLabelFechaFinal)
-                        .addGap(39, 39, 39)))
+                        .addGap(39, 39, 39))
+                    .addGroup(jPanelFechasLayout.createSequentialGroup()
+                        .addComponent(observingTextFieldFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonFechaFinal)))
                 .addGap(152, 152, 152))
         );
         jPanelFechasLayout.setVerticalGroup(
@@ -138,17 +147,17 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelFechasLayout.createSequentialGroup()
                         .addComponent(jLabelFechaInicial)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButtonFechaInicial)
-                            .addComponent(observingTextFieldFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabelFechaFinal)
+                            .addComponent(observingTextFieldFechaInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonFechaInicial)))
                     .addGroup(jPanelFechasLayout.createSequentialGroup()
-                        .addGap(43, 43, 43)
+                        .addComponent(jLabelFechaFinal)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanelFechasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButtonFechaFinal)
                             .addComponent(observingTextFieldFechaFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(0));
@@ -165,44 +174,58 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         jComboBoxPrograma.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBoxPrograma.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        jLabelSubarea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelSubarea.setText("Subárea:");
+
+        jComboBoxSubarea.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBoxSubarea.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout jPanelAreaProgramaLayout = new javax.swing.GroupLayout(jPanelAreaPrograma);
         jPanelAreaPrograma.setLayout(jPanelAreaProgramaLayout);
         jPanelAreaProgramaLayout.setHorizontalGroup(
             jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
-                .addContainerGap(33, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAreaProgramaLayout.createSequentialGroup()
+                .addContainerGap(50, Short.MAX_VALUE)
                 .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
-                        .addComponent(jLabelPrograma)
-                        .addGap(24, 24, 24)
-                        .addComponent(jComboBoxPrograma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAreaProgramaLayout.createSequentialGroup()
                         .addComponent(jLabelArea)
                         .addGap(66, 66, 66)
-                        .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
+                        .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabelPrograma)
+                            .addComponent(jLabelSubarea))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxSubarea, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jComboBoxPrograma, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(35, 35, 35))
         );
         jPanelAreaProgramaLayout.setVerticalGroup(
             jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelArea)
                     .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelPrograma)
                     .addComponent(jComboBoxPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabelSubarea)
+                    .addComponent(jComboBoxSubarea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
-        jLabelInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelInstituciones.setText("Instituciones:");
+        jLabelEstatusMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelEstatusMovimientos.setText("Estatus de Movimientos:");
 
-        jComboBoxInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBoxInstituciones.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxEstatusMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBoxEstatusMovimientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanelInstitucionesLayout = new javax.swing.GroupLayout(jPanelInstituciones);
         jPanelInstituciones.setLayout(jPanelInstitucionesLayout);
@@ -212,20 +235,52 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addGroup(jPanelInstitucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jComboBoxInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addComponent(jLabelInstituciones)))
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabelEstatusMovimientos)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelInstitucionesLayout.setVerticalGroup(
             jPanelInstitucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabelInstituciones)
-                .addGap(18, 18, 18)
-                .addComponent(jComboBoxInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jLabelEstatusMovimientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelInstituciones3.setBorder(new javax.swing.border.SoftBevelBorder(0));
+
+        jLabelInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelInstituciones3.setText("Instituciones:");
+
+        jComboBoxInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBoxInstituciones3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanelInstituciones3Layout = new javax.swing.GroupLayout(jPanelInstituciones3);
+        jPanelInstituciones3.setLayout(jPanelInstituciones3Layout);
+        jPanelInstituciones3Layout.setHorizontalGroup(
+            jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
+                .addGroup(jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jComboBoxInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
+                        .addGap(314, 314, 314)
+                        .addComponent(jLabelInstituciones3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelInstituciones3Layout.setVerticalGroup(
+            jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelInstituciones3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBoxInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jButtonAtras.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -243,41 +298,45 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabelTituloRelacionDineroNoCaptadoInstituciones)
-                .addGap(118, 118, 118))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelInstituciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
+                        .addGap(208, 208, 208)
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
-                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addGap(179, 179, 179)
+                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(153, 153, 153)
+                .addComponent(jLabelTituloRelacionMovimientosPorInstituciones)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(jLabelTituloRelacionDineroNoCaptadoInstituciones)
+                .addGap(22, 22, 22)
+                .addComponent(jLabelTituloRelacionMovimientosPorInstituciones)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
@@ -385,20 +444,20 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MovimientosPorInstituciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MovimientosPorInstituciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MovimientosPorInstituciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MovimientosPorInstituciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         // La forma se crea y se despliega.
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DineroNoCaptadoPorPeriodo().setVisible(true);
+                new MovimientosPorInstituciones().setVisible(true);
             }
         });
     }
@@ -409,17 +468,28 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonFechaInicial;
     private javax.swing.JButton jButtonGenerarReporte;
     private javax.swing.JComboBox jComboBoxArea;
-    private javax.swing.JComboBox jComboBoxInstituciones;
+    private javax.swing.JComboBox jComboBoxEstatusMovimientos;
+    private javax.swing.JComboBox jComboBoxInstituciones1;
+    private javax.swing.JComboBox jComboBoxInstituciones2;
+    private javax.swing.JComboBox jComboBoxInstituciones3;
     private javax.swing.JComboBox jComboBoxPrograma;
+    private javax.swing.JComboBox jComboBoxSubarea;
     private javax.swing.JLabel jLabelArea;
+    private javax.swing.JLabel jLabelEstatusMovimientos;
     private javax.swing.JLabel jLabelFechaFinal;
     private javax.swing.JLabel jLabelFechaInicial;
-    private javax.swing.JLabel jLabelInstituciones;
+    private javax.swing.JLabel jLabelInstituciones1;
+    private javax.swing.JLabel jLabelInstituciones2;
+    private javax.swing.JLabel jLabelInstituciones3;
     private javax.swing.JLabel jLabelPrograma;
-    private javax.swing.JLabel jLabelTituloRelacionDineroNoCaptadoInstituciones;
+    private javax.swing.JLabel jLabelSubarea;
+    private javax.swing.JLabel jLabelTituloRelacionMovimientosPorInstituciones;
     private javax.swing.JPanel jPanelAreaPrograma;
     private javax.swing.JPanel jPanelFechas;
     private javax.swing.JPanel jPanelInstituciones;
+    private javax.swing.JPanel jPanelInstituciones1;
+    private javax.swing.JPanel jPanelInstituciones2;
+    private javax.swing.JPanel jPanelInstituciones3;
     private ObservingTextField observingTextFieldFechaFinal;
     private ObservingTextField observingTextFieldFechaInicial;
     // End of variables declaration//GEN-END:variables
