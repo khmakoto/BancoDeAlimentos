@@ -1,7 +1,7 @@
 /***
- * DineroCaptadoPorPeriodo
+ * DineroNoCaptadoPorPeriodo
  * 
- * JFrame que permite al usuario generar un reporte del dinero captado de
+ * JFrame que permite al usuario generar un reporte del dinero no captado de
  * instituciones dependiendo de su elección de Fecha de inicio y término, Área,
  * Programa e Instituciones.
  * 
@@ -16,10 +16,10 @@ import java.awt.*;
 import java.util.*;
 import javax.swing.*;
 
-public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
+public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
 
     /**
-     * DineroCaptadoPorPeriodo
+     * DineroNoCaptadoPorPeriodo
      * 
      * Descripción: Método constructor que establece las condiciones iniciales
      * del JFrame.
@@ -27,7 +27,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
      * @param N/A.
      * @return N/A.
      */
-    public DineroCaptadoPorPeriodo() {
+    public DineroNoCaptadoPorPeriodo() {
         /* Se manda llamar método automáticamente generado por IDE para
          * establecer las condiciones iniciales del JFrame. */
         initComponents();
@@ -50,7 +50,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelTituloRelacionDineroCaptadoInstituciones = new javax.swing.JLabel();
+        jLabelTituloRelacionDineroNoCaptadoInstituciones = new javax.swing.JLabel();
         jPanelFechas = new javax.swing.JPanel();
         jLabelFechaInicial = new javax.swing.JLabel();
         observingTextFieldFechaInicial = new ObservingTextField();
@@ -70,12 +70,10 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         jButtonGenerarReporte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Relación de Dinero Captado de Instituciones");
-        setMaximumSize(new java.awt.Dimension(800, 600));
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setTitle("Relación de Dinero No Captado de Instituciones");
 
-        jLabelTituloRelacionDineroCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabelTituloRelacionDineroCaptadoInstituciones.setText("Relación de Dinero Captado de Instituciones");
+        jLabelTituloRelacionDineroNoCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabelTituloRelacionDineroNoCaptadoInstituciones.setText("Relación de Dinero No Captado por Instituciones");
 
         jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
@@ -171,7 +169,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         jPanelAreaProgramaLayout.setHorizontalGroup(
             jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
-                .addContainerGap(31, Short.MAX_VALUE)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanelAreaProgramaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanelAreaProgramaLayout.createSequentialGroup()
                         .addComponent(jLabelPrograma)
@@ -244,32 +242,33 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabelTituloRelacionDineroNoCaptadoInstituciones)
+                .addGap(118, 118, 118))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(194, 194, 194)
+                        .addGap(199, 199, 199)
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(195, 195, 195)
-                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(jLabelTituloRelacionDineroCaptadoInstituciones)))
+                        .addGap(175, 175, 175)
+                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(jLabelTituloRelacionDineroCaptadoInstituciones)
+                .addGap(40, 40, 40)
+                .addComponent(jLabelTituloRelacionDineroNoCaptadoInstituciones)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelFechas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -277,7 +276,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -296,9 +295,9 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         // Se obtiene la fecha actual.
         String sLang = null;
         final Locale locLocale = getLocale(sLang);
-        
+
         /* Se genera el nuevo date picker, ligándolo al Observing Text Field
-         * deseado y estableciéndole la fecha elegida. */
+        * deseado y estableciéndole la fecha elegida. */
         DatePicker dpDatePicker = new DatePicker(observingTextFieldFechaInicial, locLocale);
         Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaInicial.getText());
         dpDatePicker.setSelectedDate(datSelectedDate);
@@ -318,9 +317,9 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         // Se obtiene la fecha actual.
         String sLang = null;
         final Locale locLocale = getLocale(sLang);
-        
+
         /* Se genera el nuevo date picker, ligándolo al Observing Text Field
-         * deseado y estableciéndole la fecha elegida. */
+        * deseado y estableciéndole la fecha elegida. */
         DatePicker dpDatePicker = new DatePicker(observingTextFieldFechaFinal, locLocale);
         Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaFinal.getText());
         dpDatePicker.setSelectedDate(datSelectedDate);
@@ -340,7 +339,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         // Se crea el JFrame de la ventana a generar y se establece como visible.
         JFrame jFrameModuloAdministracion = new ModuloAdministracion();
         jFrameModuloAdministracion.setVisible(true);
-        
+
         // Se deshace el JFrame actual.
         this.dispose();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
@@ -385,20 +384,20 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(DineroCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(DineroCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(DineroCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(DineroCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(DineroNoCaptadoPorPeriodo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         // La forma se crea y se despliega.
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DineroCaptadoPorPeriodo().setVisible(true);
+                new DineroNoCaptadoPorPeriodo().setVisible(true);
             }
         });
     }
@@ -416,7 +415,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelFechaInicial;
     private javax.swing.JLabel jLabelInstituciones;
     private javax.swing.JLabel jLabelPrograma;
-    private javax.swing.JLabel jLabelTituloRelacionDineroCaptadoInstituciones;
+    private javax.swing.JLabel jLabelTituloRelacionDineroNoCaptadoInstituciones;
     private javax.swing.JPanel jPanelAreaPrograma;
     private javax.swing.JPanel jPanelFechas;
     private javax.swing.JPanel jPanelInstituciones;

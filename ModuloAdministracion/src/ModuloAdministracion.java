@@ -52,6 +52,7 @@ public class ModuloAdministracion extends javax.swing.JFrame {
         jLabelTituloMenuPrincipal = new javax.swing.JLabel();
         jButtonConsultarSaldosInstituciones = new javax.swing.JButton();
         jButtonRelacionDineroCaptadoInstituciones = new javax.swing.JButton();
+        jButtonRelacionDineroNoCaptadoInstituciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo de Administración");
@@ -80,6 +81,14 @@ public class ModuloAdministracion extends javax.swing.JFrame {
             }
         });
 
+        jButtonRelacionDineroNoCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButtonRelacionDineroNoCaptadoInstituciones.setText("Dinero No Captado de Instituciones");
+        jButtonRelacionDineroNoCaptadoInstituciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRelacionDineroNoCaptadoInstitucionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,10 +104,15 @@ public class ModuloAdministracion extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(21, 21, 21)
-                .addComponent(jButtonConsultarSaldosInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                .addComponent(jButtonRelacionDineroCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonRelacionDineroNoCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonConsultarSaldosInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                        .addComponent(jButtonRelacionDineroCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,7 +125,9 @@ public class ModuloAdministracion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonConsultarSaldosInstituciones)
                     .addComponent(jButtonRelacionDineroCaptadoInstituciones))
-                .addContainerGap(398, Short.MAX_VALUE))
+                .addGap(42, 42, 42)
+                .addComponent(jButtonRelacionDineroNoCaptadoInstituciones)
+                .addContainerGap(323, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,7 +155,7 @@ public class ModuloAdministracion extends javax.swing.JFrame {
      * jButtonRelacionDineroCaptadoInstitucionesActionPerformed
      * 
      * Descripción: Método que se inicializa al hacer click en el botón
-     * "Dinero Captado a Instituciones".
+     * "Dinero Captado de Instituciones".
      * 
      * @param evt: Evento que mandó llamar al método.
      * @return N/A.
@@ -152,6 +168,24 @@ public class ModuloAdministracion extends javax.swing.JFrame {
         // Se deshace el JFrame actual.
         this.dispose();
     }//GEN-LAST:event_jButtonRelacionDineroCaptadoInstitucionesActionPerformed
+
+    /**
+     * jButtonRelacionDineroNoCaptadoInstitucionesActionPerformed
+     * 
+     * Descripción: Método que se inicializa al hacer click en el botón
+     * "Dinero No Captado de Instituciones".
+     * 
+     * @param evt: Evento que mandó llamar al método.
+     * @return N/A.
+     */
+    private void jButtonRelacionDineroNoCaptadoInstitucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRelacionDineroNoCaptadoInstitucionesActionPerformed
+        // Se crea el JFrame de la ventana a generar y se establece como visible.
+        JFrame jFrameDineroNoCaptadoPorPeriodo = new DineroNoCaptadoPorPeriodo();
+        jFrameDineroNoCaptadoPorPeriodo.setVisible(true);
+        
+        // Se deshace el JFrame actual.
+        this.dispose();
+    }//GEN-LAST:event_jButtonRelacionDineroNoCaptadoInstitucionesActionPerformed
 
     /**
      * main
@@ -197,6 +231,7 @@ public class ModuloAdministracion extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonConsultarSaldosInstituciones;
     private javax.swing.JButton jButtonRelacionDineroCaptadoInstituciones;
+    private javax.swing.JButton jButtonRelacionDineroNoCaptadoInstituciones;
     private javax.swing.JLabel jLabelTituloMenuPrincipal;
     private javax.swing.JLabel jLabelTituloModuloAdministracion;
     // End of variables declaration//GEN-END:variables
