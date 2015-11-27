@@ -65,10 +65,10 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
         jComboBoxPrograma = new javax.swing.JComboBox();
         jLabelSubarea = new javax.swing.JLabel();
         jComboBoxSubarea = new javax.swing.JComboBox();
-        jPanelInstituciones = new javax.swing.JPanel();
+        jPanelEstatusDeMovimientos = new javax.swing.JPanel();
         jLabelEstatusMovimientos = new javax.swing.JLabel();
         jComboBoxEstatusMovimientos = new javax.swing.JComboBox();
-        jPanelInstituciones3 = new javax.swing.JPanel();
+        jPanelInstituciones = new javax.swing.JPanel();
         jLabelInstituciones3 = new javax.swing.JLabel();
         jComboBoxInstituciones3 = new javax.swing.JComboBox();
         jButtonAtras = new javax.swing.JButton();
@@ -219,13 +219,45 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelEstatusDeMovimientos.setBorder(new javax.swing.border.SoftBevelBorder(0));
 
         jLabelEstatusMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelEstatusMovimientos.setText("Estatus de Movimientos:");
 
         jComboBoxEstatusMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         jComboBoxEstatusMovimientos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        javax.swing.GroupLayout jPanelEstatusDeMovimientosLayout = new javax.swing.GroupLayout(jPanelEstatusDeMovimientos);
+        jPanelEstatusDeMovimientos.setLayout(jPanelEstatusDeMovimientosLayout);
+        jPanelEstatusDeMovimientosLayout.setHorizontalGroup(
+            jPanelEstatusDeMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEstatusDeMovimientosLayout.createSequentialGroup()
+                .addGroup(jPanelEstatusDeMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelEstatusDeMovimientosLayout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEstatusDeMovimientosLayout.createSequentialGroup()
+                        .addGap(268, 268, 268)
+                        .addComponent(jLabelEstatusMovimientos)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelEstatusDeMovimientosLayout.setVerticalGroup(
+            jPanelEstatusDeMovimientosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelEstatusDeMovimientosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabelEstatusMovimientos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+
+        jLabelInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabelInstituciones3.setText("Instituciones:");
+
+        jComboBoxInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jComboBoxInstituciones3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jPanelInstitucionesLayout = new javax.swing.GroupLayout(jPanelInstituciones);
         jPanelInstituciones.setLayout(jPanelInstitucionesLayout);
@@ -235,47 +267,15 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addGroup(jPanelInstitucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addComponent(jLabelEstatusMovimientos)))
+                        .addGap(314, 314, 314)
+                        .addComponent(jLabelInstituciones3)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanelInstitucionesLayout.setVerticalGroup(
             jPanelInstitucionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelInstitucionesLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabelEstatusMovimientos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBoxEstatusMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jPanelInstituciones3.setBorder(new javax.swing.border.SoftBevelBorder(0));
-
-        jLabelInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabelInstituciones3.setText("Instituciones:");
-
-        jComboBoxInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
-        jComboBoxInstituciones3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout jPanelInstituciones3Layout = new javax.swing.GroupLayout(jPanelInstituciones3);
-        jPanelInstituciones3.setLayout(jPanelInstituciones3Layout);
-        jPanelInstituciones3Layout.setHorizontalGroup(
-            jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
-                .addGroup(jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jComboBoxInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, 640, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
-                        .addGap(314, 314, 314)
-                        .addComponent(jLabelInstituciones3)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelInstituciones3Layout.setVerticalGroup(
-            jPanelInstituciones3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelInstituciones3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabelInstituciones3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -305,8 +305,8 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanelFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanelInstituciones3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jPanelEstatusDeMovimientos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(208, 208, 208)
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -329,9 +329,9 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelAreaPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanelInstituciones3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanelInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanelEstatusDeMovimientos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -485,11 +485,11 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelSubarea;
     private javax.swing.JLabel jLabelTituloRelacionMovimientosPorInstituciones;
     private javax.swing.JPanel jPanelAreaPrograma;
+    private javax.swing.JPanel jPanelEstatusDeMovimientos;
     private javax.swing.JPanel jPanelFechas;
     private javax.swing.JPanel jPanelInstituciones;
     private javax.swing.JPanel jPanelInstituciones1;
     private javax.swing.JPanel jPanelInstituciones2;
-    private javax.swing.JPanel jPanelInstituciones3;
     private ObservingTextField observingTextFieldFechaFinal;
     private ObservingTextField observingTextFieldFechaInicial;
     // End of variables declaration//GEN-END:variables

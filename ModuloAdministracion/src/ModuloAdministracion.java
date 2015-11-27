@@ -54,6 +54,7 @@ public class ModuloAdministracion extends javax.swing.JFrame {
         jButtonRelacionDineroCaptadoInstituciones = new javax.swing.JButton();
         jButtonRelacionDineroNoCaptadoInstituciones = new javax.swing.JButton();
         jButtonRelacionMovimientosPorInstituciones = new javax.swing.JButton();
+        jButtonAbonosInstituciones = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Módulo de Administración");
@@ -99,6 +100,14 @@ public class ModuloAdministracion extends javax.swing.JFrame {
             }
         });
 
+        jButtonAbonosInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButtonAbonosInstituciones.setText("Abonos de instituciones");
+        jButtonAbonosInstituciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAbonosInstitucionesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -116,14 +125,19 @@ public class ModuloAdministracion extends javax.swing.JFrame {
                 .addGap(21, 21, 21)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonRelacionDineroNoCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
-                        .addComponent(jButtonRelacionMovimientosPorInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButtonAbonosInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonConsultarSaldosInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonRelacionDineroCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(25, 25, 25))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonRelacionDineroNoCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addComponent(jButtonRelacionMovimientosPorInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButtonConsultarSaldosInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButtonRelacionDineroCaptadoInstituciones, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -140,7 +154,9 @@ public class ModuloAdministracion extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonRelacionDineroNoCaptadoInstituciones)
                     .addComponent(jButtonRelacionMovimientosPorInstituciones))
-                .addContainerGap(323, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jButtonAbonosInstituciones)
+                .addContainerGap(253, Short.MAX_VALUE))
         );
 
         pack();
@@ -219,6 +235,24 @@ public class ModuloAdministracion extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonRelacionMovimientosPorInstitucionesActionPerformed
 
     /**
+     * jButtonRelacionAbonosInstitucionesActionPerformed
+     * 
+     * Descripción: Método que se inicializa al hacer click en el botón
+     * "Abonos de Instituciones".
+     * 
+     * @param evt: Evento que mandó llamar al método.
+     * @return N/A.
+     */
+    private void jButtonAbonosInstitucionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAbonosInstitucionesActionPerformed
+        // Se crea el JFrame de la ventana a generar y se establece como visible.
+        JFrame jFrameAbonosInstituciones = new AbonosInstituciones();
+        jFrameAbonosInstituciones.setVisible(true);
+        
+        // Se deshace el JFrame actual.
+        this.dispose();
+    }//GEN-LAST:event_jButtonAbonosInstitucionesActionPerformed
+
+    /**
      * main
      * 
      * Descripción: Método principal que se llama si ésta es la clase inicial
@@ -260,6 +294,7 @@ public class ModuloAdministracion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonAbonosInstituciones;
     private javax.swing.JButton jButtonConsultarSaldosInstituciones;
     private javax.swing.JButton jButtonRelacionDineroCaptadoInstituciones;
     private javax.swing.JButton jButtonRelacionDineroNoCaptadoInstituciones;

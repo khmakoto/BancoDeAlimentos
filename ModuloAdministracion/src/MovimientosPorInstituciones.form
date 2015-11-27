@@ -41,8 +41,8 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanelFechas" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanelAreaPrograma" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jPanelEstatusDeMovimientos" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanelInstituciones" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jPanelInstituciones3" alignment="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -72,9 +72,9 @@
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanelAreaPrograma" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jPanelInstituciones3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jPanelInstituciones" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jPanelEstatusDeMovimientos" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jButtonAtras" min="-2" pref="59" max="-2" attributes="0"/>
@@ -351,7 +351,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelInstituciones">
+    <Container class="javax.swing.JPanel" name="jPanelEstatusDeMovimientos">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
@@ -416,7 +416,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanelInstituciones3">
+    <Container class="javax.swing.JPanel" name="jPanelInstituciones">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
