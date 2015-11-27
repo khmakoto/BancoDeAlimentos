@@ -1,5 +1,5 @@
 /***
- * ListadoSaldosInstituciones.
+ * ListadoSaldosInstituciones
  * 
  * JFrame que permite al usuario listar los saldos a instituciones dependiendo
  * de su elección de Área, Programa e Institución.
@@ -53,7 +53,7 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        jPanelOpciones = new javax.swing.JPanel();
         jLabelArea = new javax.swing.JLabel();
         jComboBoxArea = new javax.swing.JComboBox();
         jLabelPrograma = new javax.swing.JLabel();
@@ -72,10 +72,10 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
-        jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(0));
-        jPanel1.setMaximumSize(new java.awt.Dimension(750, 180));
-        jPanel1.setMinimumSize(new java.awt.Dimension(750, 180));
-        jPanel1.setPreferredSize(new java.awt.Dimension(750, 180));
+        jPanelOpciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelOpciones.setMaximumSize(new java.awt.Dimension(750, 180));
+        jPanelOpciones.setMinimumSize(new java.awt.Dimension(750, 180));
+        jPanelOpciones.setPreferredSize(new java.awt.Dimension(750, 180));
 
         jLabelArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelArea.setText("Área");
@@ -106,53 +106,53 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonBuscar.setText("Buscar");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jPanelOpcionesLayout = new javax.swing.GroupLayout(jPanelOpciones);
+        jPanelOpciones.setLayout(jPanelOpcionesLayout);
+        jPanelOpcionesLayout.setHorizontalGroup(
+            jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOpcionesLayout.createSequentialGroup()
+                .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                         .addGap(87, 87, 87)
                         .addComponent(jLabelArea)))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(jComboBoxPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(jComboBoxInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(22, 22, 22))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                         .addGap(88, 88, 88)
                         .addComponent(jLabelPrograma)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabelInstitucion)
                         .addGap(117, 117, 117))))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                 .addGap(234, 234, 234)
                 .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60)
                 .addComponent(jButtonBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelOpcionesLayout.setVerticalGroup(
+            jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelOpcionesLayout.createSequentialGroup()
                 .addGap(23, 23, 23)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelArea)
                     .addComponent(jLabelPrograma)
                     .addComponent(jLabelInstitucion))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBoxArea, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxPrograma, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBoxInstitucion, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelOpcionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAtras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(26, Short.MAX_VALUE))
@@ -186,7 +186,7 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelOpciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
                 .addGap(23, 23, 23))
             .addGroup(layout.createSequentialGroup()
@@ -200,7 +200,7 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addComponent(jLabelTituloSaldosInstituciones)
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanelOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(40, Short.MAX_VALUE))
@@ -277,7 +277,7 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelInstitucion;
     private javax.swing.JLabel jLabelPrograma;
     private javax.swing.JLabel jLabelTituloSaldosInstituciones;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelOpciones;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTableSaldosInstituciones;
     // End of variables declaration//GEN-END:variables
