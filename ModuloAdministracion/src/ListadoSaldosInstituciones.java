@@ -15,9 +15,16 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
 import java.sql.*;
+import java.util.*;
 
 public class ListadoSaldosInstituciones extends javax.swing.JFrame {
 
+    /* Se declaran arreglos de IDs en que se guardarán IDs de Áreas, Programas e
+     * Instituciones. */
+    private String sIDAreas[];
+    private String sIDProgramas[];
+    private String sIDInstituciones[];
+    
     /**
      * ListadoSaldosInstituciones
      * 
@@ -78,15 +85,18 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
                     int iTamAreas = rsResultados.getInt("tamanio");
                     int iI = 0;
                     String sAreas[] = new String[iTamAreas];
+                    sIDAreas = new String[iTamAreas];
                     
                     // Se ejecuta query para obtener cada Área.
-                    sSQLQuery = "SELECT Area FROM Areas";
+                    sSQLQuery = "SELECT IDArea, Area FROM Areas";
                     rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
                     
                     // Se itera sobre los resultados y se agregan al arreglo.
                     while(rsResultados.next()){
                         String sArea = rsResultados.getString("Area");
+                        String sID = rsResultados.getString("IDArea");
                         sAreas[iI] = sArea;
+                        sIDAreas[iI] = sID;
                         iI++;
                     }
                     
@@ -161,15 +171,18 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
                     int iTamProgramas = rsResultados.getInt("tamanio");
                     int iI = 0;
                     String sProgramas[] = new String[iTamProgramas];
+                    sIDProgramas = new String[iTamProgramas];
                     
                     // Se ejecuta query para obtener cada Programa.
-                    sSQLQuery = "SELECT Programa FROM Programas";
+                    sSQLQuery = "SELECT IDPrograma, Programa FROM Programas";
                     rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
                     
                     // Se itera sobre los resultados y se agregan al arreglo.
                     while(rsResultados.next()){
                         String sPrograma = rsResultados.getString("Programa");
+                        String sID = rsResultados.getString("IDPrograma");
                         sProgramas[iI] = sPrograma;
+                        sIDProgramas[iI] = sID;
                         iI++;
                     }
                     
@@ -244,15 +257,18 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
                     int iTamInstituciones = rsResultados.getInt("tamanio");
                     int iI = 0;
                     String sInstituciones[] = new String[iTamInstituciones];
+                    sIDInstituciones = new String[iTamInstituciones];
                     
                     // Se ejecuta query para obtener cada Institución.
-                    sSQLQuery = "SELECT Institucion FROM Instituciones";
+                    sSQLQuery = "SELECT IDInstitucion, Institucion FROM Instituciones";
                     rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
                     
                     // Se itera sobre los resultados y se agregan al arreglo.
                     while(rsResultados.next()){
                         String sInstitucion = rsResultados.getString("Institucion");
+                        String sID = rsResultados.getString("IDInstitucion");
                         sInstituciones[iI] = sInstitucion;
+                        sIDInstituciones[iI] = sID;
                         iI++;
                     }
                     
@@ -360,6 +376,11 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
 
         jButtonBuscar.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanelOpcionesLayout = new javax.swing.GroupLayout(jPanelOpciones);
         jPanelOpciones.setLayout(jPanelOpcionesLayout);
@@ -480,6 +501,105 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         // Se deshace el JFrame actual.
         this.dispose();
     }//GEN-LAST:event_jButtonAtrasActionPerformed
+
+    /**
+     * jButtonBuscarActionPerformed
+     * 
+     * Descripción: Método que se ejecuta al hacer click en el botón de "Buscar".
+     * Obtiene de la base de datos la información según los campos especificados
+     * en los JComboBox.
+     * 
+     * @param evt: Evento que mandó llamar al método.
+     * @return N/A.
+     */
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+        // Se obtienen los IDs de los elementos seleccionados en los JComboBox.
+        String sIDArea = sIDAreas[ jComboBoxArea.getSelectedIndex() ];
+        String sIDPrograma = sIDProgramas[ jComboBoxPrograma.getSelectedIndex() ];
+        String sIDInstitucion = sIDInstituciones[ jComboBoxInstitucion.getSelectedIndex() ];
+        
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para obtener los datos de los movimientos.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT IDFolioCarAbo, IDFolio, FechaMov, Importe, Abono, Saldo "
+                    + "FROM MovCarAbo WHERE "
+                    + "IDArea = '" + sIDArea + "' AND "
+                    + "IDPrograma = '" + sIDPrograma + "' AND "
+                    + "IDInstitucion = '" + sIDInstitucion + "'";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Vector que servirá de modelo para la tabla.
+                Vector vecData = new Vector();
+                
+                // Mientras hayan resultados.
+                while(rsResultados.next()){
+                    // Se inicializa vector donde se guardarán los datos.
+                    Vector vecResultados = new Vector(9);
+                    vecResultados.addElement(jComboBoxInstitucion.getSelectedItem());
+                    vecResultados.addElement(jComboBoxArea.getSelectedItem());
+                    vecResultados.addElement(jComboBoxPrograma.getSelectedItem());
+                    
+                    
+                    // Se guardan los resultados en el vector.
+                    for(int iI = 1; iI <= 6; iI++){
+                        vecResultados.addElement(rsResultados.getObject(iI));
+                    }
+                    
+                    // Se guarda el vector en el vector de datos.
+                    vecData.addElement(vecResultados);
+                }
+                
+                // Se establece vector con nombres de columnas
+                Vector vecNombresColumnas = new Vector();
+                vecNombresColumnas.addElement("Institución");
+                vecNombresColumnas.addElement("Área");
+                vecNombresColumnas.addElement("Programa");
+                vecNombresColumnas.addElement("FolCarAbo");
+                vecNombresColumnas.addElement("Folio");
+                vecNombresColumnas.addElement("Fecha");
+                vecNombresColumnas.addElement("Cargo");
+                vecNombresColumnas.addElement("Abono");
+                vecNombresColumnas.addElement("Saldo");
+                
+                // Se genera nuevo modelo para la tabla basado en el vector de datos.
+                DefaultTableModel dtmModel = new DefaultTableModel(vecData, vecNombresColumnas);
+                
+                // Se pone el nuevo modelo en la tabla.
+                jTableSaldosInstituciones.setModel(dtmModel);
+            }
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
     
     /**
      * main
