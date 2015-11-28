@@ -40,8 +40,10 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
         
-        // Se obtiene información de áreas de la base de datos y se ponen en el JComboBox correspondiente.
+        // Se obtiene información de la base de datos y se ponen en sus JComboBox correspondientes.
         informacionAreas();
+        informacionProgramas();
+        informacionInstituciones();
     }
     
     /**
@@ -100,6 +102,172 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
                     sAreas[0] = "---";
                     DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sAreas);
                     jComboBoxArea.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * informacionProgramas
+     * 
+     * Descripción: Método que obtiene la información de todos los programas guardados
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionProgramas(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Programas";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamProgramas = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sProgramas[] = new String[iTamProgramas];
+                    
+                    // Se ejecuta query para obtener cada Programa.
+                    sSQLQuery = "SELECT Programa FROM Programas";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sPrograma = rsResultados.getString("Programa");
+                        sProgramas[iI] = sPrograma;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sProgramas);
+                    jComboBoxPrograma.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sProgramas[] = new String[1];
+                    sProgramas[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sProgramas);
+                    jComboBoxPrograma.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * informacionInstituciones
+     * 
+     * Descripción: Método que obtiene la información de todas los instituciones guardadas
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionInstituciones(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Instituciones";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamInstituciones = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sInstituciones[] = new String[iTamInstituciones];
+                    
+                    // Se ejecuta query para obtener cada Institución.
+                    sSQLQuery = "SELECT Institucion FROM Instituciones";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sInstitucion = rsResultados.getString("Institucion");
+                        sInstituciones[iI] = sInstitucion;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sInstituciones);
+                    jComboBoxInstitucion.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sInstituciones[] = new String[1];
+                    sInstituciones[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sInstituciones);
+                    jComboBoxInstitucion.setModel(cbmModelo);
                 }
             }
  
