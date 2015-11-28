@@ -470,8 +470,7 @@ public class DatePicker extends Observable implements Runnable, WindowFocusListe
 
     public Date parseDate(String date) {
         if (sdf == null)
-            sdf = SimpleDateFormat.getDateInstance(SimpleDateFormat.SHORT,
-                    locale);
+            sdf = new SimpleDateFormat("yyyy-MM-dd");
         try {
             return sdf.parse(date);
         } catch (Exception e) {

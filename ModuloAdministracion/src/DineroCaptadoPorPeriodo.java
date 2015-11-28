@@ -78,7 +78,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         jLabelTituloRelacionDineroCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTituloRelacionDineroCaptadoInstituciones.setText("Relación de Dinero Captado de Instituciones");
 
-        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelFechaInicial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelFechaInicial.setText("Fecha Inicial:");
@@ -153,7 +153,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelArea.setText("Área:");
@@ -198,7 +198,7 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelInstituciones.setText("Instituciones:");

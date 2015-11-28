@@ -13,11 +13,17 @@
  */
 
 import java.awt.*;
+import java.sql.*;
 import java.util.*;
 import javax.swing.*;
 
 public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
 
+    /* Se declaran arreglos de IDs en que se guardarán IDs de Áreas, Programas e
+     * Instituciones. */
+    private String sIDAreas[];
+    private String sIDProgramas[];
+    
     /**
      * DineroNoCaptadoPorPeriodo
      * 
@@ -35,8 +41,184 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         // Acción para hacer que la ventana aparezca en el centro de la pantalla.
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
+        
+        // Se obtiene información de la base de datos y se ponen en sus JComboBox correspondientes.
+        informacionAreas();
+        informacionProgramas();
     }
 
+    /**
+     * informacionAreas
+     * 
+     * Descripción: Método que obtiene la información de todas las áreas guardadas
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionAreas(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Areas";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamAreas = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sAreas[] = new String[iTamAreas];
+                    sIDAreas = new String[iTamAreas];
+                    
+                    // Se ejecuta query para obtener cada Área.
+                    sSQLQuery = "SELECT IDArea, Area FROM Areas";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sArea = rsResultados.getString("Area");
+                        String sID = rsResultados.getString("IDArea");
+                        sAreas[iI] = sArea;
+                        sIDAreas[iI] = sID;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sAreas);
+                    jComboBoxArea.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sAreas[] = new String[1];
+                    sAreas[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sAreas);
+                    jComboBoxArea.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * informacionProgramas
+     * 
+     * Descripción: Método que obtiene la información de todos los programas guardados
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionProgramas(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Programas";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamProgramas = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sProgramas[] = new String[iTamProgramas];
+                    sIDProgramas = new String[iTamProgramas];
+                    
+                    // Se ejecuta query para obtener cada Programa.
+                    sSQLQuery = "SELECT IDPrograma, Programa FROM Programas";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sPrograma = rsResultados.getString("Programa");
+                        String sID = rsResultados.getString("IDPrograma");
+                        sProgramas[iI] = sPrograma;
+                        sIDProgramas[iI] = sID;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sProgramas);
+                    jComboBoxPrograma.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sProgramas[] = new String[1];
+                    sProgramas[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sProgramas);
+                    jComboBoxPrograma.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
     /**
      * initComponents
      * 
@@ -300,7 +482,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         /* Se genera el nuevo date picker, ligándolo al Observing Text Field
         * deseado y estableciéndole la fecha elegida. */
         DatePicker dpDatePicker = new DatePicker(observingTextFieldFechaInicial, locLocale);
-        Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaInicial.getText());
+        java.util.Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaInicial.getText());
         dpDatePicker.setSelectedDate(datSelectedDate);
         dpDatePicker.start(observingTextFieldFechaInicial);
     }//GEN-LAST:event_jButtonFechaInicialActionPerformed
@@ -322,7 +504,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         /* Se genera el nuevo date picker, ligándolo al Observing Text Field
         * deseado y estableciéndole la fecha elegida. */
         DatePicker dpDatePicker = new DatePicker(observingTextFieldFechaFinal, locLocale);
-        Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaFinal.getText());
+        java.util.Date datSelectedDate = dpDatePicker.parseDate(observingTextFieldFechaFinal.getText());
         dpDatePicker.setSelectedDate(datSelectedDate);
         dpDatePicker.start(observingTextFieldFechaFinal);
     }//GEN-LAST:event_jButtonFechaFinalActionPerformed
