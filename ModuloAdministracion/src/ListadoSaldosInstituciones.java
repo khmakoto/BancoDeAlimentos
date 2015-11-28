@@ -14,6 +14,7 @@
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import java.sql.*;
 
 public class ListadoSaldosInstituciones extends javax.swing.JFrame {
 
@@ -38,6 +39,92 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         // Acción para hacer que la ventana aparezca en el centro de la pantalla.
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
+        
+        // Se obtiene información de áreas de la base de datos y se ponen en el JComboBox correspondiente.
+        informacionAreas();
+    }
+    
+    /**
+     * informacionAreas
+     * 
+     * Descripción: Método que obtiene la información de todas las áreas guardadas
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionAreas(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Areas";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamAreas = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sAreas[] = new String[iTamAreas];
+                    
+                    // Se ejecuta query para obtener cada Área.
+                    sSQLQuery = "SELECT Area FROM Areas";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sArea = rsResultados.getString("Area");
+                        sAreas[iI] = sArea;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sAreas);
+                    jComboBoxArea.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sAreas[] = new String[1];
+                    sAreas[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sAreas);
+                    jComboBoxArea.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -72,7 +159,7 @@ public class ListadoSaldosInstituciones extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
-        jPanelOpciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelOpciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanelOpciones.setMaximumSize(new java.awt.Dimension(750, 180));
         jPanelOpciones.setMinimumSize(new java.awt.Dimension(750, 180));
         jPanelOpciones.setPreferredSize(new java.awt.Dimension(750, 180));
