@@ -19,7 +19,12 @@ import java.io.*;
 import java.sql.*;
 import java.text.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import org.apache.poi.hssf.usermodel.HSSFFont;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.*;
 
 public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
 
@@ -696,7 +701,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
      * jButtonGenerarExcelActionPerformed
      * 
      * Descripción: Método que se inicializa al hacer click en el botón de
-     * "Generar Excel". Genera un archivo CSV de acuerdo a las especificaciones
+     * "Generar Excel". Genera un archivo XLSX de acuerdo a las especificaciones
      * establecidas.
      * 
      * @param evt: Evento que mandó llamar al método.
@@ -713,6 +718,14 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
             
             // Si la fecha final es mayor a la inicial.
             if(datFechaFinal.after(datFechaInicial)){
+                // Se atrapan excepciones de Entrada y Salida.
+                try {
+                    // Se manda generar el archivo XLSX.
+                    generarExcel();
+                }
+                catch (IOException ex) {
+                    System.out.println("Excepción: Entrada y Salida.");
+                }
             }
             
             // Si la fecha final es menor o igual a la inicial.
@@ -901,6 +914,189 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                     
                     // Se cierra el archivo.
                     docDocumento.close();
+                    
+                    // Se genera una alerta indicando que se creó el archivo.
+                    JOptionPane.showMessageDialog(this,
+                        "El archivo se creó correctamente en su escritorio.",
+                        "Éxito!",
+                        JOptionPane.PLAIN_MESSAGE);
+                }
+                // Si el tamaño es cero.
+                else{
+                    // Se genera una alerta indicando esto.
+                    JOptionPane.showMessageDialog(this,
+                        "No hay valores con esos datos.",
+                        "Alerta!",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
+     * generarExcel
+     * 
+     * Descripción: Método usado para generar el archivo XLSX de acuerdo a los
+     * elementos seleccionados.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void generarExcel() throws IOException{
+        /* Se obtienen los IDs de los elementos seleccionados en los JComboBox y
+         * las fechas seleccionadas en los DatePickers. */
+        String sIDArea = sIDAreas[ jComboBoxArea.getSelectedIndex() ];
+        String sIDPrograma = sIDProgramas[ jComboBoxPrograma.getSelectedIndex() ];
+        String sIDInstitucion = sIDInstituciones[ jComboBoxInstituciones.getSelectedIndex() ];
+        String sFechaInicial = observingTextFieldFechaInicial.getText();
+        String sFechaFinal = observingTextFieldFechaFinal.getText();
+
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber si hay resultados.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio "
+                    + "FROM MovCarAbo WHERE "
+                    + "IDArea = '" + sIDArea + "' AND "
+                    + "IDPrograma = '" + sIDPrograma + "' AND "
+                    + "IDInstitucion = '" + sIDInstitucion + "' AND "
+                    + "Estatus = 'Pendiente' AND "
+                    + "FechaMov >= CAST('" + sFechaInicial + "' AS DATE) AND "
+                    + "FechaMov <= CAST('" + sFechaFinal + "' AS DATE)";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Se obtiene el tamaño.
+                rsResultados.next();
+                int iTam = rsResultados.getInt("tamanio");
+                
+                // Si el tamaño no es cero.
+                if(iTam > 0){
+                    // Se ejecuta query para obtener resultados.
+                    sSQLQuery = "SELECT IDFolio, FechaMov, Saldo "
+                        + "FROM MovCarAbo WHERE "
+                        + "IDArea = '" + sIDArea + "' AND "
+                        + "IDPrograma = '" + sIDPrograma + "' AND "
+                        + "IDInstitucion = '" + sIDInstitucion + "' AND "
+                        + "Estatus = 'Pendiente' AND "
+                        + "FechaMov >= CAST('" + sFechaInicial + "' AS DATETIME) AND "
+                        + "FechaMov <= CAST('" + sFechaFinal + "' AS DATETIME)";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se genera un workbook en blanco.
+                    XSSFWorkbook wbkWorkbook = new XSSFWorkbook();
+                    
+                    // Se crea una hoja en blanco.
+                    XSSFSheet shtHoja = wbkWorkbook.createSheet("Relación de Dinero No Captado");
+                    
+                    // Se genera la fecha del archivo.
+                    SimpleDateFormat sdfFormato = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date datFechaActual = new java.util.Date();
+                    String sFechaActual = sdfFormato.format(datFechaActual);
+                    Row rowFila = shtHoja.createRow(0);
+                    Cell cllCelda = rowFila.createCell(0);
+                    cllCelda.setCellValue(sFechaActual);
+                    
+                    // Se genera el título del archivo.
+                    String sTitulo = "BANCO DE ALIMENTOS";
+                    rowFila = shtHoja.createRow(1);
+                    cllCelda = rowFila.createCell(0);
+                    cllCelda.setCellValue(sTitulo);
+                    
+                    // Se genera el subtítulo del archivo.
+                    String sSubtitulo = "Relación de Dinero Captado";
+                    rowFila = shtHoja.createRow(2);
+                    cllCelda = rowFila.createCell(0);
+                    cllCelda.setCellValue(sSubtitulo);
+                    
+                    // Se pone institución.
+                    String sInstitucion = (String)jComboBoxInstituciones.getSelectedItem();
+                    rowFila = shtHoja.createRow(3);
+                    cllCelda = rowFila.createCell(0);
+                    cllCelda.setCellValue(sInstitucion);
+                    
+                    // Se escriben datos a guardar.
+                    Map<String, Object[]> mapData = new TreeMap<String, Object[]>();
+                    mapData.put("1", new Object[] {"Área", "Programa", "Folio", "Fecha", "Saldo"});
+                    
+                    // Se obtienen strings de área y programa seleccionados.
+                    String sArea = (String)jComboBoxArea.getSelectedItem();
+                    String sPrograma = (String)jComboBoxPrograma.getSelectedItem();
+                    int iI = 2;
+                    
+                    // Se declara variable donde se guardará saldo total.
+                    double dSaldo = 0;
+                    double dSaldoTotal = 0;
+                    
+                    // Se agregan resultados de la base de datos a la tabla.
+                    while(rsResultados.next()){
+                        String sFolio = rsResultados.getString("IDFolio");
+                        java.util.Date datFecha = rsResultados.getDate("FechaMov");
+                        String sFecha = sdfFormato.format(datFecha);
+                        dSaldo = rsResultados.getDouble("Saldo");
+                        dSaldoTotal += dSaldo;
+                        mapData.put(Integer.toString(iI), new Object[] {sArea, sPrograma, sFolio, sFecha, dSaldo});
+                        iI++;
+                    }
+                    
+                    // Se itera sobre los resultados y se escriben en la hoja.
+                    Set<String> setKeyset = mapData.keySet();
+                    int iNumeroFila = 5;
+                    for(String sKey : setKeyset){
+                        rowFila = shtHoja.createRow(iNumeroFila++);
+                        Object objArreglo[] = mapData.get(sKey);
+                        int iNumeroCelda = 0;
+                        for(Object objObjeto : objArreglo){
+                            cllCelda = rowFila.createCell(iNumeroCelda++);
+                            if(objObjeto instanceof String){
+                                cllCelda.setCellValue((String)objObjeto);
+                            }
+                            else if(objObjeto instanceof Double){
+                                cllCelda.setCellValue((Double)objObjeto);
+                            }
+                        }
+                    }
+                    
+                    // Se pone saldo total.
+                    rowFila = shtHoja.createRow(iNumeroFila);
+                    cllCelda = rowFila.createCell(3);
+                    cllCelda.setCellValue("Total");
+                    cllCelda = rowFila.createCell(4);
+                    cllCelda.setCellValue(dSaldoTotal);
+                    
+                    // Se escribe el workbook en un archivo.
+                    FileOutputStream fosArchivo = new FileOutputStream(new File("C:/Users/HumbertoMakoto/Desktop/Relación de Dinero No Captado.xlsx"));
+                    wbkWorkbook.write(fosArchivo);
+                    fosArchivo.close();
                     
                     // Se genera una alerta indicando que se creó el archivo.
                     JOptionPane.showMessageDialog(this,
