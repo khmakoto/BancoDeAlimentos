@@ -1033,7 +1033,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                     cllCelda.setCellValue(sTitulo);
                     
                     // Se genera el subtítulo del archivo.
-                    String sSubtitulo = "Relación de Dinero Captado";
+                    String sSubtitulo = "Relación de Dinero No Captado";
                     rowFila = shtHoja.createRow(2);
                     cllCelda = rowFila.createCell(0);
                     cllCelda.setCellValue(sSubtitulo);
