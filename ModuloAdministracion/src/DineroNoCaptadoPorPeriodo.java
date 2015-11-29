@@ -13,7 +13,11 @@
  */
 
 import java.awt.*;
+import com.itextpdf.text.*;
+import com.itextpdf.text.pdf.*;
+import java.io.*;
 import java.sql.*;
+import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -23,6 +27,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
      * Instituciones. */
     private String sIDAreas[];
     private String sIDProgramas[];
+    private String sIDInstituciones[];
     
     /**
      * DineroNoCaptadoPorPeriodo
@@ -45,6 +50,13 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         // Se obtiene información de la base de datos y se ponen en sus JComboBox correspondientes.
         informacionAreas();
         informacionProgramas();
+        informacionInstituciones();
+        
+        // Se establece la fecha de los ObservingTextFields como la fecha de hoy.
+        SimpleDateFormat sdfFormatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date datFechaActual = new java.util.Date();
+        observingTextFieldFechaInicial.setText(sdfFormatoFecha.format(datFechaActual));
+        observingTextFieldFechaFinal.setText(sdfFormatoFecha.format(datFechaActual));
     }
 
     /**
@@ -220,6 +232,92 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
     }
     
     /**
+     * informacionInstituciones
+     * 
+     * Descripción: Método que obtiene la información de todas los instituciones guardadas
+     * en la base de datos y carga con esto el JComboBox correspondiente.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void informacionInstituciones(){
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber el tamaño del JComboBox.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio FROM Instituciones";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Si hubo resultados.
+                if(rsResultados.next()){
+                    // Se crea arreglo que servirá como modelo del JComboBox.
+                    int iTamInstituciones = rsResultados.getInt("tamanio");
+                    int iI = 0;
+                    String sInstituciones[] = new String[iTamInstituciones];
+                    sIDInstituciones = new String[iTamInstituciones];
+                    
+                    // Se ejecuta query para obtener cada Institución.
+                    sSQLQuery = "SELECT IDInstitucion, Institucion FROM Instituciones";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    // Se itera sobre los resultados y se agregan al arreglo.
+                    while(rsResultados.next()){
+                        String sInstitucion = rsResultados.getString("Institucion");
+                        String sID = rsResultados.getString("IDInstitucion");
+                        sInstituciones[iI] = sInstitucion;
+                        sIDInstituciones[iI] = sID;
+                        iI++;
+                    }
+                    
+                    // Se establece el arreglo generado como modelo del JComboBox.
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sInstituciones);
+                    jComboBoxInstituciones.setModel(cbmModelo);
+                }
+                
+                // Si no hubo resultados.
+                else{
+                    // Se establece un arreglo vacío.
+                    String sInstituciones[] = new String[1];
+                    sInstituciones[0] = "---";
+                    DefaultComboBoxModel cbmModelo = new DefaultComboBoxModel(sInstituciones);
+                    jComboBoxInstituciones.setModel(cbmModelo);
+                }
+            }
+ 
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+    
+    /**
      * initComponents
      * 
      * Descripción: Método automáticamente generado por el IDE que inicializa
@@ -249,7 +347,8 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         jLabelInstituciones = new javax.swing.JLabel();
         jComboBoxInstituciones = new javax.swing.JComboBox();
         jButtonAtras = new javax.swing.JButton();
-        jButtonGenerarReporte = new javax.swing.JButton();
+        jButtonGenerarPDF = new javax.swing.JButton();
+        jButtonGenerarExcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Relación de Dinero No Captado de Instituciones");
@@ -258,7 +357,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         jLabelTituloRelacionDineroNoCaptadoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTituloRelacionDineroNoCaptadoInstituciones.setText("Relación de Dinero No Captado por Instituciones");
 
-        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelFechaInicial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelFechaInicial.setText("Fecha Inicial:");
@@ -333,7 +432,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelArea.setText("Área:");
@@ -378,7 +477,7 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
-        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelInstituciones.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelInstituciones.setText("Instituciones:");
@@ -418,8 +517,21 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
             }
         });
 
-        jButtonGenerarReporte.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButtonGenerarReporte.setText("<html>\nGenerar<br/>\nReporte");
+        jButtonGenerarPDF.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButtonGenerarPDF.setText("<html> <center>Generar<br/> PDF</center>");
+        jButtonGenerarPDF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarPDFActionPerformed(evt);
+            }
+        });
+
+        jButtonGenerarExcel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jButtonGenerarExcel.setText("<html> <center>Generar<br/> Excel</center>");
+        jButtonGenerarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGenerarExcelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -438,10 +550,12 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                             .addComponent(jPanelFechas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanelInstituciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(199, 199, 199)
+                        .addGap(140, 140, 140)
                         .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(175, 175, 175)
-                        .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(96, 96, 96)
+                        .addComponent(jButtonGenerarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(102, 102, 102)
+                        .addComponent(jButtonGenerarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -458,7 +572,9 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonGenerarReporte, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonGenerarPDF, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonGenerarExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(22, 22, 22))
         );
 
@@ -528,6 +644,93 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAtrasActionPerformed
 
     /**
+     * jButtonGenerarPDFActionPerformed
+     * 
+     * Descripción: Método que se inicializa al hacer click en el botón de
+     * "Generar PDF". Genera un archivo PDF de acuerdo a las especificaciones
+     * establecidas.
+     * 
+     * @param evt: Evento que mandó llamar al método.
+     * @return N/A.
+     */
+    private void jButtonGenerarPDFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarPDFActionPerformed
+        /* Se pone el código en medio de un try para atrapar excepciones en el
+         * parse de las fechas. */
+        try {
+            // Se obtienen las fechas inicial y final para comparar.
+            SimpleDateFormat sdfFormato = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date datFechaInicial = sdfFormato.parse(observingTextFieldFechaInicial.getText());
+            java.util.Date datFechaFinal = sdfFormato.parse(observingTextFieldFechaFinal.getText());
+            
+            // Si la fecha final es mayor a la inicial.
+            if(datFechaFinal.after(datFechaInicial)){
+                // Se atrapan excepciones de Archivos y Documentos.
+                try {
+                    // Se manda generar el archivo PDF.
+                    generarPDF();
+                }
+                catch (FileNotFoundException ex) {
+                    System.out.println("Excepción: Archivo no encontrado.");
+                }
+                catch (DocumentException ex) {
+                    System.out.println("Excepción en el documento PDF.");
+                }
+            }
+            
+            // Si la fecha final es menor o igual a la inicial.
+            else{
+                // Se genera una alerta indicando esto.
+                JOptionPane.showMessageDialog(this,
+                    "Elige una fecha final que sea mayor a la inicial.",
+                    "Alerta!",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        // Si hubo una excepción se marca en consola.
+        catch (ParseException ex) {
+            System.out.println("Excepción de parsing de fechas.");
+        }
+    }//GEN-LAST:event_jButtonGenerarPDFActionPerformed
+
+    /**
+     * jButtonGenerarExcelActionPerformed
+     * 
+     * Descripción: Método que se inicializa al hacer click en el botón de
+     * "Generar Excel". Genera un archivo CSV de acuerdo a las especificaciones
+     * establecidas.
+     * 
+     * @param evt: Evento que mandó llamar al método.
+     * @return N/A.
+     */
+    private void jButtonGenerarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGenerarExcelActionPerformed
+        /* Se pone el código en medio de un try para atrapar excepciones en el
+         * parse de las fechas. */
+        try {
+            // Se obtienen las fechas inicial y final para comparar.
+            SimpleDateFormat sdfFormato = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date datFechaInicial = sdfFormato.parse(observingTextFieldFechaInicial.getText());
+            java.util.Date datFechaFinal = sdfFormato.parse(observingTextFieldFechaFinal.getText());
+            
+            // Si la fecha final es mayor a la inicial.
+            if(datFechaFinal.after(datFechaInicial)){
+            }
+            
+            // Si la fecha final es menor o igual a la inicial.
+            else{
+                // Se genera una alerta indicando esto.
+                JOptionPane.showMessageDialog(this,
+                    "Elige una fecha final que sea mayor a la inicial.",
+                    "Alerta!",
+                    JOptionPane.WARNING_MESSAGE);
+            }
+        }
+        // Si hubo una excepción se marca en consola.
+        catch (ParseException ex) {
+            System.out.println("Excepción de parsing de fechas.");
+        }
+    }//GEN-LAST:event_jButtonGenerarExcelActionPerformed
+
+    /**
      * getLocale
      * 
      * Descripción: Método usado por el DatePicker para obtener la fecha actual.
@@ -541,6 +744,200 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
         }
         else {
             return Locale.US;
+        }
+    }
+    
+    /**
+     * generarPDF
+     * 
+     * Descripción: Método usado para generar el archivo PDF de acuerdo a los
+     * elementos seleccionados.
+     * 
+     * @param N/A.
+     * @return N/A.
+     */
+    private void generarPDF() throws FileNotFoundException, DocumentException{
+        /* Se obtienen los IDs de los elementos seleccionados en los JComboBox y
+         * las fechas seleccionadas en los DatePickers. */
+        String sIDArea = sIDAreas[ jComboBoxArea.getSelectedIndex() ];
+        String sIDPrograma = sIDProgramas[ jComboBoxPrograma.getSelectedIndex() ];
+        String sIDInstitucion = sIDInstituciones[ jComboBoxInstituciones.getSelectedIndex() ];
+        String sFechaInicial = observingTextFieldFechaInicial.getText();
+        String sFechaFinal = observingTextFieldFechaFinal.getText();
+
+        // Se declara la conexión.
+        Connection conConexion = null;
+ 
+        // Se programa todo dentro de un try para revisar si hay problemas.
+        try {
+            // Se establece la conexión a la base de datos.
+            String sDataBaseURL = "jdbc:sqlserver://MAKOTO\\SQLEXPRESS;databaseName=BancoDeAlimentos;integratedSecurity=true;";
+            conConexion = DriverManager.getConnection(sDataBaseURL);
+            
+            // Si no hubo errores de conexión.
+            if (conConexion != null) {
+                // Se ejecuta query para saber si hay resultados.
+                Statement stmtEstatuto = conConexion.createStatement();
+                String sSQLQuery = "SELECT COUNT(*) AS tamanio "
+                    + "FROM MovCarAbo WHERE "
+                    + "IDArea = '" + sIDArea + "' AND "
+                    + "IDPrograma = '" + sIDPrograma + "' AND "
+                    + "IDInstitucion = '" + sIDInstitucion + "' AND "
+                    + "Estatus = 'Pendiente' AND "
+                    + "FechaMov >= CAST('" + sFechaInicial + "' AS DATE) AND "
+                    + "FechaMov <= CAST('" + sFechaFinal + "' AS DATE)";
+                ResultSet rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                
+                // Se obtiene el tamaño.
+                rsResultados.next();
+                int iTam = rsResultados.getInt("tamanio");
+                
+                // Si el tamaño no es cero.
+                if(iTam > 0){
+                    // Se ejecuta query para obtener resultados.
+                    sSQLQuery = "SELECT IDFolio, FechaMov, Saldo "
+                        + "FROM MovCarAbo WHERE "
+                        + "IDArea = '" + sIDArea + "' AND "
+                        + "IDPrograma = '" + sIDPrograma + "' AND "
+                        + "IDInstitucion = '" + sIDInstitucion + "' AND "
+                        + "Estatus = 'Pendiente' AND "
+                        + "FechaMov >= CAST('" + sFechaInicial + "' AS DATETIME) AND "
+                        + "FechaMov <= CAST('" + sFechaFinal + "' AS DATETIME)";
+                    rsResultados = stmtEstatuto.executeQuery(sSQLQuery);
+                    
+                    /* Se declaran valores que se utilizarán para creación de
+                     * PDF. */
+                    String sArchivo = "C:/Users/HumbertoMakoto/Desktop/Relación de Dinero No Captado.pdf";
+                    com.itextpdf.text.Font fntTitulo = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 18, com.itextpdf.text.Font.BOLD);
+                    com.itextpdf.text.Font fntResaltado = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 14, com.itextpdf.text.Font.BOLD);
+                    com.itextpdf.text.Font fntNormal = new com.itextpdf.text.Font(com.itextpdf.text.Font.FontFamily.TIMES_ROMAN, 12, com.itextpdf.text.Font.NORMAL);
+                    
+                    // Se genera el archivo y se abre.
+                    Document docDocumento = new Document();
+                    PdfWriter.getInstance(docDocumento, new FileOutputStream(sArchivo));
+                    docDocumento.open();
+                    
+                    // Se genera la metadata del documento.
+                    docDocumento.addTitle("Relación de Dinero No Captado");
+                    docDocumento.addAuthor("Banco de Alimentos de Cáritas");
+                    docDocumento.addCreator("Banco de Alimentos de Cáritas");
+                    
+                    // Se genera la fecha del archivo.
+                    SimpleDateFormat sdfFormato = new SimpleDateFormat("yyyy-MM-dd");
+                    java.util.Date datFechaActual = new java.util.Date();
+                    Paragraph parFecha = new Paragraph(sdfFormato.format(datFechaActual), fntNormal);
+                    parFecha.setAlignment(Element.ALIGN_RIGHT);
+                    docDocumento.add(parFecha);
+                    
+                    // Se genera el título del archivo.
+                    Paragraph parTitulo = new Paragraph("BANCO DE ALIMENTOS", fntTitulo);
+                    parTitulo.setAlignment(Element.ALIGN_CENTER);
+                    docDocumento.add(parTitulo);
+                    
+                    // Se genera el subtítulo del archivo.
+                    Paragraph parSubtitulo = new Paragraph("Relación de Dinero no Captado", fntResaltado);
+                    parSubtitulo.setAlignment(Element.ALIGN_CENTER);
+                    docDocumento.add(parSubtitulo);
+                    
+                    // Se pone institución.
+                    Paragraph parInstitucion = new Paragraph((String)jComboBoxInstituciones.getSelectedItem(), fntNormal);
+                    parInstitucion.setAlignment(Element.ALIGN_CENTER);
+                    docDocumento.add(parInstitucion);
+                    
+                    // Se agregan algunos espacios en blanco.
+                    Paragraph parLineaBlanco = new Paragraph(" ");
+                    docDocumento.add(parLineaBlanco);
+                    docDocumento.add(parLineaBlanco);
+                    
+                    /* Se crea tabla para poner información obtenida de base de
+                     * datos y se establecen sus headers. */
+                    PdfPTable ptbTabla = new PdfPTable(5);
+                    PdfPCell pclHeader1 = new PdfPCell(new Phrase("Área"));
+                    pclHeader1.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    PdfPCell pclHeader2 = new PdfPCell(new Phrase("Programa"));
+                    pclHeader2.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    PdfPCell pclHeader3 = new PdfPCell(new Phrase("Folio"));
+                    pclHeader3.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    PdfPCell pclHeader4 = new PdfPCell(new Phrase("Fecha"));
+                    pclHeader4.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    PdfPCell pclHeader5 = new PdfPCell(new Phrase("Saldo"));
+                    pclHeader5.setHorizontalAlignment(Element.ALIGN_CENTER);
+                    ptbTabla.addCell(pclHeader1);
+                    ptbTabla.addCell(pclHeader2);
+                    ptbTabla.addCell(pclHeader3);
+                    ptbTabla.addCell(pclHeader4);
+                    ptbTabla.addCell(pclHeader5);
+                    ptbTabla.setHeaderRows(1);
+                    
+                    // Se obtienen strings de área y programa seleccionados.
+                    String sArea = (String)jComboBoxArea.getSelectedItem();
+                    String sPrograma = (String)jComboBoxPrograma.getSelectedItem();
+                    
+                    // Se declara variable donde se guardará saldo total.
+                    double dSaldo = 0;
+                    double dSaldoTotal = 0;
+                    
+                    // Se agregan resultados de la base de datos a la tabla.
+                    while(rsResultados.next()){
+                        ptbTabla.addCell(sArea);
+                        ptbTabla.addCell(sPrograma);
+                        ptbTabla.addCell(rsResultados.getString("IDFolio"));
+                        java.util.Date datFecha = rsResultados.getDate("FechaMov");
+                        ptbTabla.addCell(sdfFormato.format(datFecha));
+                        dSaldo = rsResultados.getDouble("Saldo");
+                        dSaldoTotal += dSaldo;
+                        ptbTabla.addCell(Double.toString(dSaldo));
+                    }
+                    
+                    // Se agrega saldo total al documento.
+                    for(int iI = 0; iI < 3; iI++){
+                        ptbTabla.addCell("");
+                    }
+                    ptbTabla.addCell(new PdfPCell(new Phrase("Total", fntResaltado)));
+                    ptbTabla.addCell(new PdfPCell(new Phrase(Double.toString(dSaldoTotal), fntResaltado)));
+                    
+                    // Se agrega la tabla al documento.
+                    docDocumento.add(ptbTabla);
+                    
+                    // Se cierra el archivo.
+                    docDocumento.close();
+                    
+                    // Se genera una alerta indicando que se creó el archivo.
+                    JOptionPane.showMessageDialog(this,
+                        "El archivo se creó correctamente en su escritorio.",
+                        "Éxito!",
+                        JOptionPane.PLAIN_MESSAGE);
+                }
+                // Si el tamaño es cero.
+                else{
+                    // Se genera una alerta indicando esto.
+                    JOptionPane.showMessageDialog(this,
+                        "No hay valores con esos datos.",
+                        "Alerta!",
+                        JOptionPane.WARNING_MESSAGE);
+                }
+            }
+        }
+        
+        // Si hubo alguna excepción de SQL se imprime la traza programática de ésta.
+        catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        // Independientemente de si hubo conexión o no.
+        finally {
+            // Se cierra la conexión a la base de datos si estaba abierta.
+            try {
+                if (conConexion != null && !conConexion.isClosed()) {
+                    conConexion.close();
+                }
+            }
+            
+            /* Si hubo alguna excepción de SQL se imprime la traza programática
+             * de ésta. */
+            catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
     
@@ -589,7 +986,8 @@ public class DineroNoCaptadoPorPeriodo extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAtras;
     private javax.swing.JButton jButtonFechaFinal;
     private javax.swing.JButton jButtonFechaInicial;
-    private javax.swing.JButton jButtonGenerarReporte;
+    private javax.swing.JButton jButtonGenerarExcel;
+    private javax.swing.JButton jButtonGenerarPDF;
     private javax.swing.JComboBox jComboBoxArea;
     private javax.swing.JComboBox jComboBoxInstituciones;
     private javax.swing.JComboBox jComboBoxPrograma;

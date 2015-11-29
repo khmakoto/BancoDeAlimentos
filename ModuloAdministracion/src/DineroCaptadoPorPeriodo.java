@@ -13,6 +13,7 @@
  */
 
 import java.awt.*;
+import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -35,6 +36,12 @@ public class DineroCaptadoPorPeriodo extends javax.swing.JFrame {
         // Acción para hacer que la ventana aparezca en el centro de la pantalla.
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
+        
+        // Se establece la fecha de los ObservingTextFields como la fecha de hoy.
+        SimpleDateFormat sdfFormatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date datFechaActual = new java.util.Date();
+        observingTextFieldFechaInicial.setText(sdfFormatoFecha.format(datFechaActual));
+        observingTextFieldFechaFinal.setText(sdfFormatoFecha.format(datFechaActual));
     }
 
     /**

@@ -12,6 +12,7 @@
  */
 
 import java.awt.*;
+import java.text.*;
 import java.util.*;
 import javax.swing.*;
 import javax.swing.table.*;
@@ -39,6 +40,11 @@ public class AbonosInstituciones extends javax.swing.JFrame {
         // Acción para hacer que la ventana aparezca en el centro de la pantalla.
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
+        
+        // Se establece la fecha de los ObservingTextFields como la fecha de hoy.
+        SimpleDateFormat sdfFormatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date datFechaActual = new java.util.Date();
+        jTextFieldFecha.setText(sdfFormatoFecha.format(datFechaActual));
     }
 
     /**
@@ -87,7 +93,7 @@ public class AbonosInstituciones extends javax.swing.JFrame {
         jLabelAbonoInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelAbonoInstituciones.setText("Abonos de Instituciones");
 
-        jPanelOpciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelOpciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelFolioAbono.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelFolioAbono.setText("Folio Abono:");
@@ -98,6 +104,7 @@ public class AbonosInstituciones extends javax.swing.JFrame {
         jLabelFecha.setText("Fecha:");
 
         jTextFieldFecha.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        jTextFieldFecha.setEnabled(false);
 
         jLabelInstitucion.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelInstitucion.setText("Institución:");

@@ -13,6 +13,7 @@
  */
 
 import java.awt.*;
+import java.text.*;
 import java.util.*;
 import javax.swing.*;
 
@@ -35,6 +36,12 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
         // Acción para hacer que la ventana aparezca en el centro de la pantalla.
         Dimension dimDimension = Toolkit.getDefaultToolkit().getScreenSize();
         this.setLocation(dimDimension.width / 2 - this.getSize().width / 2, dimDimension.height / 2 - this.getSize().height / 2);
+        
+        // Se establece la fecha de los ObservingTextFields como la fecha de hoy.
+        SimpleDateFormat sdfFormatoFecha = new SimpleDateFormat("yyyy-MM-dd");
+        java.util.Date datFechaActual = new java.util.Date();
+        observingTextFieldFechaInicial.setText(sdfFormatoFecha.format(datFechaActual));
+        observingTextFieldFechaFinal.setText(sdfFormatoFecha.format(datFechaActual));
     }
 
     /**
@@ -78,13 +85,12 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
         setTitle("Relación de Movimientos por Instituciones");
         setMaximumSize(new java.awt.Dimension(800, 600));
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
 
         jLabelTituloRelacionMovimientosPorInstituciones.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabelTituloRelacionMovimientosPorInstituciones.setText("Relación de Movimientos por Instituciones");
 
-        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelFechas.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelFechaInicial.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelFechaInicial.setText("Fecha Inicial:");
@@ -160,7 +166,7 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelAreaPrograma.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelArea.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelArea.setText("Área:");
@@ -219,7 +225,7 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelEstatusDeMovimientos.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelEstatusDeMovimientos.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelEstatusMovimientos.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelEstatusMovimientos.setText("Estatus de Movimientos:");
@@ -251,7 +257,7 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(0));
+        jPanelInstituciones.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabelInstituciones3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabelInstituciones3.setText("Instituciones:");
@@ -469,8 +475,6 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
     private javax.swing.JButton jButtonGenerarReporte;
     private javax.swing.JComboBox jComboBoxArea;
     private javax.swing.JComboBox jComboBoxEstatusMovimientos;
-    private javax.swing.JComboBox jComboBoxInstituciones1;
-    private javax.swing.JComboBox jComboBoxInstituciones2;
     private javax.swing.JComboBox jComboBoxInstituciones3;
     private javax.swing.JComboBox jComboBoxPrograma;
     private javax.swing.JComboBox jComboBoxSubarea;
@@ -478,8 +482,6 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelEstatusMovimientos;
     private javax.swing.JLabel jLabelFechaFinal;
     private javax.swing.JLabel jLabelFechaInicial;
-    private javax.swing.JLabel jLabelInstituciones1;
-    private javax.swing.JLabel jLabelInstituciones2;
     private javax.swing.JLabel jLabelInstituciones3;
     private javax.swing.JLabel jLabelPrograma;
     private javax.swing.JLabel jLabelSubarea;
@@ -488,8 +490,6 @@ public class MovimientosPorInstituciones extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelEstatusDeMovimientos;
     private javax.swing.JPanel jPanelFechas;
     private javax.swing.JPanel jPanelInstituciones;
-    private javax.swing.JPanel jPanelInstituciones1;
-    private javax.swing.JPanel jPanelInstituciones2;
     private ObservingTextField observingTextFieldFechaFinal;
     private ObservingTextField observingTextFieldFechaInicial;
     // End of variables declaration//GEN-END:variables
