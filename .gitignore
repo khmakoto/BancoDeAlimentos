@@ -4,7 +4,6 @@
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.ear
 
@@ -59,3 +58,4 @@ $RECYCLE.BIN/
 *.lnk
 /ModuloAdministracion/nbproject/private/
 /ModuloAdministracion/build/
+/ModuloAdministracion/dist/
